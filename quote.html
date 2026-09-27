@@ -1,0 +1,1395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GREENWORLD – Quotation</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --green: #2c5f2e;
+        --green-dark: #214923;
+        --green-light: #3d7a40;
+        --green-bg: #eef4ee;
+        --charcoal: #1a1a1a;
+        --mid: #4a4a4a;
+        --light: #777;
+        --border: #d2d2d2;
+        --soft: #f7f8f7;
+        --white: #fff;
+        --danger: #b23b32;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background: #e8e8e8;
+        color: var(--charcoal);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      /* =========================================================
+       TOOLBAR
+    ========================================================= */
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 22px;
+        background: var(--charcoal);
+        color: white;
+      }
+
+      .toolbar-title {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .toolbar button {
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-add {
+        background: var(--green-light);
+        color: white;
+      }
+
+      .btn-print {
+        background: white;
+        color: var(--charcoal);
+      }
+
+      .btn-clear {
+        background: #555;
+        color: white;
+      }
+
+      /* =========================================================
+       PAGE
+    ========================================================= */
+
+      .page-container {
+        padding: 25px 20px 50px;
+      }
+
+      .quotation {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto 25px;
+        background: white;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.15);
+        position: relative;
+        padding: 0;
+      }
+
+      .page {
+        padding: 16mm 14mm 18mm;
+        min-height: 297mm;
+        position: relative;
+      }
+
+      /* =========================================================
+       DOCUMENT HEADER
+    ========================================================= */
+
+      .document-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        gap: 25px;
+        padding-bottom: 11px;
+        border-bottom: 2px solid var(--green);
+      }
+
+      .quotation-title h1 {
+        font-size: 25px;
+        line-height: 1;
+        color: var(--charcoal);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .quotation-title p {
+        margin-top: 3px;
+        color: var(--light);
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+      }
+
+      .company-brand {
+        text-align: right;
+      }
+
+      .logo-placeholder {
+        width: 155px;
+        height: 55px;
+        border: 1px dashed var(--border);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--light);
+        font-size: 8px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+      }
+
+      .company-brand-name {
+        color: var(--green);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .company-brand-sub {
+        font-size: 8px;
+        color: var(--mid);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* =========================================================
+       TOP INFORMATION
+    ========================================================= */
+
+      .top-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .info-card {
+        border: 1px solid var(--green-light);
+        border-radius: 3px;
+        padding: 10px 12px;
+        min-height: 100px;
+      }
+
+      .info-card h3 {
+        font-size: 8px;
+        text-transform: uppercase;
+        color: var(--green);
+        letter-spacing: 0.08em;
+        margin-bottom: 7px;
+      }
+
+      .info-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 7px;
+        padding: 2px 0;
+      }
+
+      .info-label {
+        color: var(--mid);
+        font-weight: 600;
+      }
+
+      .info-value {
+        color: var(--charcoal);
+        font-weight: 500;
+      }
+
+      .placeholder {
+        color: var(--light);
+        font-style: italic;
+      }
+
+      /* =========================================================
+       SECTION TITLE
+    ========================================================= */
+
+      .section-title {
+        margin-top: 13px;
+        padding: 6px 10px;
+        background: var(--soft);
+        border: 1px solid var(--border);
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--charcoal);
+        letter-spacing: 0.03em;
+      }
+
+      .quotation-heading {
+        padding: 10px 12px;
+        font-size: 15px;
+        letter-spacing: 0.04em;
+      }
+
+      /* =========================================================
+       INTRODUCTION
+    ========================================================= */
+
+      .intro {
+        padding: 10px 12px;
+        color: var(--mid);
+        font-size: 12px;
+        line-height: 1.65;
+      }
+
+      .intro .client-name {
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 5px;
+      }
+
+      /* =========================================================
+       SERVICE TABLE
+    ========================================================= */
+
+      .service-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
+
+      .service-table th {
+        background: var(--green);
+        color: white;
+        padding: 7px 6px;
+        font-size: 9px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .service-table th:first-child,
+      .service-table td:first-child {
+        text-align: left;
+      }
+
+      .service-table td {
+        border: 1px solid var(--border);
+        padding: 7px;
+        vertical-align: top;
+        font-size: 9.5px;
+      }
+
+      .service-table td.amount {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .service-name {
+        font-weight: 700;
+        color: var(--charcoal);
+        margin-bottom: 4px;
+      }
+
+      .service-description {
+        color: var(--mid);
+        white-space: pre-line;
+      }
+
+      .scope-title {
+        margin-top: 7px;
+        font-weight: 700;
+        color: var(--green);
+      }
+
+      .scope-list {
+        margin-top: 3px;
+        padding-left: 14px;
+        color: var(--mid);
+      }
+
+      .scope-list li {
+        margin-bottom: 2px;
+      }
+
+      /* =========================================================
+       EDITABLE SERVICE INPUTS
+    ========================================================= */
+
+      .editable {
+        border: none;
+        border-bottom: 1px dashed #bbb;
+        outline: none;
+        width: 100%;
+        font: inherit;
+        color: inherit;
+        background: transparent;
+      }
+
+      .editable:focus {
+        border-bottom-color: var(--green);
+      }
+
+      textarea.editable {
+        resize: vertical;
+        min-height: 100px;
+        line-height: 1.55;
+        padding: 5px 0;
+      }
+
+      .service-table textarea.editable {
+        font-size: 11px;
+      }
+
+      .scope-template-select {
+        width: 100%;
+        margin: 4px 0 2px;
+        padding: 7px 8px;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        background: white;
+        color: var(--charcoal);
+        font: inherit;
+        font-size: 10.5px;
+      }
+
+      .quotation-title-select {
+        margin-right: 8px;
+        padding: 3px 5px;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        background: white;
+        color: var(--charcoal);
+        font: inherit;
+        font-weight: 600;
+      }
+
+      .remove-service {
+        background: none;
+        border: none;
+        color: #aaa;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      .remove-service:hover {
+        color: var(--danger);
+      }
+
+      /* =========================================================
+       TOTALS
+    ========================================================= */
+
+      .totals {
+        width: 330px;
+        margin-left: auto;
+        margin-top: 8px;
+        border-collapse: collapse;
+      }
+
+      .totals td {
+        padding: 5px 7px;
+        border-bottom: 1px solid #eee;
+        font-size: 9px;
+      }
+
+      .totals td:last-child {
+        text-align: right;
+        font-weight: 600;
+      }
+
+      .grand-total td {
+        background: var(--green);
+        color: white;
+        font-size: 10px;
+        font-weight: 700 !important;
+        border-bottom: none;
+        padding: 8px;
+      }
+
+      /* =========================================================
+       QUOTATION DETAILS
+    ========================================================= */
+
+      .quotation-details {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+      }
+
+      .quotation-details td {
+        border: 1px solid var(--border);
+        padding: 7px 10px;
+      }
+
+      .quotation-details td:first-child {
+        width: 145px;
+        font-weight: 600;
+        color: var(--mid);
+        background: var(--soft);
+      }
+
+      /* =========================================================
+       TERMS & CONDITIONS
+    ========================================================= */
+
+      .terms-heading {
+        margin-top: 13px;
+        background: var(--soft);
+        border: 1px solid var(--border);
+        padding: 7px;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .terms-subheading {
+        margin-top: 8px;
+        background: #f9eef2;
+        border: 1px solid #e1cbd3;
+        padding: 5px 8px;
+        font-weight: 700;
+        font-size: 9px;
+      }
+
+      .terms-intro {
+        padding: 8px 0;
+        font-size: 10.5px;
+        color: var(--mid);
+        line-height: 1.6;
+      }
+
+      .terms-list {
+        padding-left: 18px;
+        font-size: 10px;
+        color: var(--mid);
+        line-height: 1.55;
+      }
+
+      .terms-list li {
+        margin-bottom: 7px;
+      }
+
+      .terms-list strong {
+        color: var(--charcoal);
+      }
+
+      /* =========================================================
+       CLOSING
+    ========================================================= */
+
+      .closing-message {
+        margin-top: 14px;
+        font-size: 10.5px;
+        color: var(--mid);
+        line-height: 1.6;
+      }
+
+      .signature-name {
+        margin-top: 10px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      /* =========================================================
+       PAGE 3 ACCEPTANCE
+    ========================================================= */
+
+      .acceptance-box {
+        border: 1px solid var(--border);
+        min-height: 75px;
+        padding: 12px;
+        margin-top: 10px;
+        font-size: 9px;
+      }
+
+      .signature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-top: 14px;
+      }
+
+      .signature-card {
+        border: 1px solid var(--border);
+        min-height: 115px;
+        padding: 12px;
+        position: relative;
+        max-width: 50%;
+      }
+
+      .signature-card h4 {
+        font-size: 9px;
+        margin-bottom: 40px;
+      }
+
+      .signature-line {
+        border-bottom: 1px solid #777;
+        padding-bottom: 4px;
+        margin-top: 8px;
+        font-size: 8.5px;
+        color: var(--mid);
+      }
+
+      .stamp-area {
+        height: 58px;
+        border: 1px dashed #aaa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--light);
+        font-size: 8px;
+        margin-bottom: 8px;
+      }
+
+      /* =========================================================
+       BANK DETAILS
+    ========================================================= */
+
+      .bank-title {
+        margin-top: 16px;
+        background: var(--soft);
+        border: 1px solid var(--border);
+        padding: 7px;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .bank-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 7px;
+      }
+
+      .bank-table td {
+        border: 1px solid var(--border);
+        padding: 7px 9px;
+        font-size: 9px;
+      }
+
+      .bank-table td:first-child {
+        width: 170px;
+        font-weight: 700;
+        background: var(--soft);
+      }
+
+      /* =========================================================
+       FOOTER
+    ========================================================= */
+
+      .page-footer {
+        position: absolute;
+        left: 14mm;
+        right: 14mm;
+        bottom: 8mm;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #ddd;
+        padding-top: 5px;
+        color: #777;
+        font-size: 7.5px;
+      }
+
+      /* =========================================================
+       PRINT
+    ========================================================= */
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        .toolbar {
+          display: none !important;
+        }
+
+        .page-container {
+          padding: 0;
+        }
+
+        .quotation {
+          width: 210mm;
+          min-height: 297mm;
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+        }
+
+        .quotation:last-child {
+          page-break-after: auto;
+        }
+
+        .page {
+          min-height: 297mm;
+          padding: 14mm 14mm 17mm;
+        }
+
+        .remove-service {
+          display: none !important;
+        }
+
+        .editable {
+          border-bottom: none !important;
+        }
+
+        .scope-template-select {
+          display: none !important;
+        }
+
+        .quotation-title-select {
+          display: none !important;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        .quotation {
+          width: 100%;
+        }
+
+        .top-info {
+          grid-template-columns: 1fr;
+        }
+
+        .signature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================================================
+       TOOLBAR
+  ========================================================== -->
+
+    <div class="toolbar">
+      <div class="toolbar-title">GREENWORLD — Quotation Template</div>
+
+      <button class="btn-add" onclick="addService()">+ Add Service</button>
+
+      <button class="btn-clear" onclick="clearQuotation()">Clear</button>
+
+      <button class="btn-print" onclick="window.print()">
+        🖨 Print / Save PDF
+      </button>
+    </div>
+
+    <div class="page-container">
+      <!-- =======================================================
+         PAGE 1
+    ======================================================== -->
+
+      <div class="quotation">
+        <div class="page">
+          <!-- HEADER -->
+
+          <div class="document-header">
+            <div class="quotation-title">
+              <h1>QUOTATION</h1>
+              <p>Service Proposal</p>
+            </div>
+
+            <div class="company-brand">
+              <div class="logo-placeholder">GREENWORLD LOGO</div>
+
+              <div class="company-brand-name">GREENWORLD</div>
+
+              <div class="company-brand-sub">Cleaning & Facility Services</div>
+            </div>
+          </div>
+
+          <!-- CUSTOMER + QUOTATION INFORMATION -->
+
+          <div class="top-info">
+            <div class="info-card">
+              <h3>Attention</h3>
+
+              <div class="info-row">
+                <div class="info-label">Customer</div>
+                <div class="info-value">
+                  <input
+                    class="editable"
+                    placeholder="[CUSTOMER LEGAL NAME]"
+                    aria-label="Customer legal name"
+                  />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Contact Person</div>
+                <div class="info-value">
+                  <input
+                    class="editable"
+                    placeholder="[CUSTOMER NAME]"
+                    aria-label="Contact person"
+                  />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Address</div>
+                <div class="info-value">
+                  <input
+                    class="editable"
+                    placeholder="[CUSTOMER ADDRESS]"
+                    aria-label="Customer address"
+                  />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Phone</div>
+                <div class="info-value">
+                  <input
+                    class="editable"
+                    type="tel"
+                    placeholder="[+971 XX XXX XXXX]"
+                    aria-label="Customer phone"
+                  />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Email</div>
+                <div class="info-value">
+                  <input
+                    class="editable"
+                    type="email"
+                    placeholder="[CUSTOMER EMAIL]"
+                    aria-label="Customer email"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h3>Quotation Details</h3>
+
+              <div class="info-row">
+                <div class="info-label">Quote No.</div>
+                <div class="info-value">
+                  <input
+                    id="quoteNo"
+                    class="editable"
+                    value="GW-QT-2026-0001"
+                  />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Date</div>
+                <div class="info-value">
+                  <input id="quoteDate" class="editable" type="date" />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Valid Until</div>
+                <div class="info-value">
+                  <input id="validUntil" class="editable" type="date" />
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Sales Executive</div>
+                <div class="info-value placeholder">[SALES EXECUTIVE]</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INTRODUCTION -->
+
+          <div class="section-title quotation-heading">
+            <select
+              class="quotation-title-select"
+              aria-label="Choose quotation title"
+              onchange="updateQuotationTitle(this.value)"
+            >
+              <option value="QUOTATION">QUOTATION</option>
+              <option value="KITCHEN HOOD CLEANING">
+                KITCHEN HOOD CLEANING
+              </option>
+              <option value="WATER TANK CLEANING">WATER TANK CLEANING</option>
+              <option value="AC DUCT CLEANING">AC DUCT CLEANING</option>
+            </select>
+            <span id="quotationHeading">QUOTATION</span>
+          </div>
+
+          <div class="intro">
+            <div class="client-name">Dear Valued Client,</div>
+
+            We thank you for giving us an opportunity to quote for this service.
+            Based on your request, we are pleased to present our proposal for
+            your consideration.
+
+            <br /><br />
+
+            We are committed to delivering reliable, professional and quality
+            services while maintaining customer satisfaction throughout the
+            service period.
+          </div>
+
+          <!-- SERVICES -->
+
+          <div class="section-title">SERVICE PROPOSAL</div>
+
+          <table class="service-table">
+            <thead>
+              <tr>
+                <th>Location / Service Description</th>
+                <th style="width: 45px">#</th>
+                <th style="width: 100px">Charges (AED)</th>
+                <th style="width: 25px"></th>
+              </tr>
+            </thead>
+
+            <tbody id="serviceBody"></tbody>
+          </table>
+
+          <!-- TOTALS -->
+
+          <table class="totals">
+            <tr>
+              <td>SUBTOTAL (Services)</td>
+              <td id="subtotal">AED 0.00</td>
+            </tr>
+
+            <tr>
+              <td>VAT 5%</td>
+              <td id="vat">AED 0.00</td>
+            </tr>
+
+            <tr class="grand-total">
+              <td>TOTAL (Including Tax)</td>
+              <td id="total">AED 0.00</td>
+            </tr>
+          </table>
+
+          <!-- QUOTATION TERMS -->
+
+          <table class="quotation-details">
+            <tr>
+              <td>Payment Terms</td>
+              <td class="placeholder">[BANK TRANSFER / CARD / OTHER]</td>
+            </tr>
+
+            <tr>
+              <td>Quote Validity</td>
+              <td>
+                <input class="editable" value="30 days" />
+              </td>
+            </tr>
+
+            <tr>
+              <td>VAT</td>
+              <td class="placeholder">
+                Prices are subject to UAE VAT at the applicable rate.
+              </td>
+            </tr>
+          </table>
+
+          <!-- FOOTER -->
+
+          <div class="page-footer">
+            <span> GW-QT-2026-0001 </span>
+
+            <span> Page 1 of 3 </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+         PAGE 2 — TERMS & CONDITIONS
+    ======================================================== -->
+
+      <div class="quotation">
+        <div class="page">
+          <div class="document-header">
+            <div class="quotation-title">
+              <h1>QUOTATION</h1>
+              <p>Service Proposal</p>
+            </div>
+
+            <div class="company-brand">
+              <div class="logo-placeholder">GREENWORLD LOGO</div>
+
+              <div class="company-brand-name">GREENWORLD</div>
+
+              <div class="company-brand-sub">Cleaning & Facility Services</div>
+            </div>
+          </div>
+
+          <div class="terms-heading">TERMS & CONDITIONS</div>
+
+          <div class="terms-subheading">Service Terms & Liability</div>
+
+          <div class="terms-intro">
+            The following Terms & Conditions are intended to ensure quality,
+            safety and consistency in the services provided by Greenworld.
+          </div>
+
+          <ol class="terms-list">
+            <li>
+              <strong>Service Confirmation:</strong>
+              Quoted charges are valid for the period specified in this
+              quotation. The customer may confirm acceptance by Purchase Order,
+              written confirmation, email or other agreed communication method.
+            </li>
+
+            <li>
+              <strong>Access & Approvals:</strong>
+              The customer is responsible for providing reasonable access to the
+              premises and obtaining any permissions, permits or approvals
+              required from building management, community management or
+              relevant authorities.
+            </li>
+
+            <li>
+              <strong>Utilities:</strong>
+              Where reasonably required for the agreed service, the customer
+              shall provide access to available electricity and water facilities
+              at the service location.
+            </li>
+
+            <li>
+              <strong>Security:</strong>
+              Customers should secure cash, valuables, confidential documents
+              and other sensitive belongings before service commencement.
+            </li>
+
+            <li>
+              <strong>Service Completion & Satisfaction:</strong>
+              Any incident, breakage, damage, service issue or loss relating to
+              the service should be reported promptly in writing after
+              completion so that it can be reviewed.
+            </li>
+
+            <li>
+              <strong>Additional Services:</strong>
+              Any work requested outside the agreed scope may be treated as an
+              additional service and may result in an adjustment to the
+              quotation.
+            </li>
+
+            <li>
+              <strong>Personnel:</strong>
+              Greenworld will assign personnel appropriate to the service
+              requirements and provide relevant operational instructions and
+              training.
+            </li>
+
+            <li>
+              <strong>Cancellation / Rescheduling:</strong>
+              Cancellation or postponement should be communicated within the
+              notice period specified in the quotation. Applicable cancellation
+              charges, if any, will be stated before the service is confirmed.
+            </li>
+
+            <li>
+              <strong>Privacy:</strong>
+              Customer information received by Greenworld will be used for
+              legitimate business and service purposes and handled in accordance
+              with applicable requirements.
+            </li>
+
+            <li>
+              <strong>Service Limitations:</strong>
+              Certain stains, damage, discoloration or existing conditions may
+              not be fully removable through normal cleaning processes. Where
+              applicable, Greenworld will communicate such limitations before or
+              during the service.
+            </li>
+
+            <li>
+              <strong>Working Hours:</strong>
+              Standard service hours are
+              <span class="placeholder">[ENTER WORKING HOURS]</span>. Services
+              outside standard hours may be subject to additional charges where
+              applicable.
+            </li>
+
+            <li>
+              <strong>Construction / Renovation:</strong>
+              Where construction or renovation activities continue after
+              cleaning, additional cleaning may be required and may be quoted
+              separately.
+            </li>
+
+            <li>
+              <strong>Customer Responsibility:</strong>
+              The customer acknowledges that the service location must be
+              reasonably accessible and suitable for the agreed service.
+            </li>
+          </ol>
+
+          <div class="closing-message">
+            On behalf of everyone at Greenworld, thank you for your enquiry. We
+            appreciate the opportunity to provide our services and look forward
+            to serving you.
+
+            <div class="signature-name">
+              Yours sincerely,<br /><br />
+              [AUTHORIZED REPRESENTATIVE]
+            </div>
+          </div>
+
+          <div class="page-footer">
+            <span> GW-QT-2026-0001 </span>
+
+            <span> Page 2 of 3 </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+         PAGE 3 — ACCEPTANCE + BANK DETAILS
+    ======================================================== -->
+
+      <div class="quotation">
+        <div class="page">
+          <div class="document-header">
+            <div class="quotation-title">
+              <h1>QUOTATION</h1>
+              <p>Service Proposal</p>
+            </div>
+
+            <div class="company-brand">
+              <div class="logo-placeholder">GREENWORLD LOGO</div>
+
+              <div class="company-brand-name">GREENWORLD</div>
+
+              <div class="company-brand-sub">Cleaning & Facility Services</div>
+            </div>
+          </div>
+
+          <!-- ACCEPTANCE -->
+
+          <div class="section-title">CONFIRMATION LETTER / ACCEPTANCE FORM</div>
+
+          <div class="acceptance-box">
+            I / We accept the terms & conditions of the above quotation and
+            confirm our acceptance of the proposed services, pricing and
+            applicable terms.
+          </div>
+
+          <!-- SIGNATURES -->
+
+          <div class="signature-grid">
+            <div class="signature-card">
+              <h4>For Greenworld (Authorized Signatory)</h4>
+
+              <div class="stamp-area">COMPANY STAMP / SIGNATURE</div>
+
+              <div class="signature-line">Authorized Signatory</div>
+            </div>
+          </div>
+
+          <!-- BANK DETAILS -->
+
+          <div class="closing-message">
+            <strong>Important:</strong>
+            This quotation is subject to the terms and conditions stated herein.
+            Actual company, banking and tax information must be entered only
+            from Greenworld's official records.
+          </div>
+
+          <div class="page-footer">
+            <span> GW-QT-2026-0001 </span>
+
+            <span> Page 3 of 3 </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+    <script>
+      let services = [
+        {
+          location: "[SERVICE LOCATION]",
+          description: "SERVICE NAME",
+          scope: "Describe the agreed scope of work here.",
+          qty: 1,
+          amount: 0,
+        },
+      ];
+
+      const scopeTemplates = {
+        kitchen: `KITCHEN HOOD CLEANING\n\n• Open all required duct access panels for proper internal cleaning.\n• Clean all exhaust ducts and remove accumulated grease, oil, and contaminants.\n• Supply and install new GI sheet access panels after cleaning.\n• Deep clean the internal and external surfaces of the kitchen hood.\n• Clean all hood filters, baffle filters, and exhaust grilles.\n• Clean the exhaust fan, including the impeller, blades, and casing.\n• Clean the ESP (Electrostatic Precipitator) system, including cells and collector plates.\n• Remove grease deposits to improve airflow and system performance.\n• Submit before-and-after photographs as proof of completed work.\n• Provide a service completion report.`,
+        watertank: `WATER TANK CLEANING\n\nTank: Concrete tank, 50,000 gallons — 1 unit\n\n• Disinfect pipelines by chemical flushing using approved chemicals, subject to municipality approval.\n• Clean the inside and outside of the water tank.\n• Remove dirt, debris, and sediment from the tank.\n• Clean, scour, and pressure wash tank wall surfaces using approved methods.\n• Dry and refill the tank with municipality water.\n• Provide a detailed report with before-and-after photographs of the cleaning process.`,
+        acduct: `AC DUCT CLEANING\n\n• Cover work areas with plastic sheeting.\n• Remove and clean filters; clean fixed filters in place.\n• Brush-clean ducts using a rotary brush machine to remove dust and debris.\n• Apply an AC duct sanitizer to help control bacteria, grime, and fungus.\n• Clean all air diffusers, linear grilles, ducts, and grilles.\n• Check airflow, humidity, and cooling for each machine.\n• Use suitable cleaning products for grilles.\n• Provide a before-and-after service report.`,
+      };
+
+      /* =========================================================
+       RENDER SERVICES
+    ========================================================== */
+
+      function renderServices() {
+        const body = document.getElementById("serviceBody");
+
+        body.innerHTML = "";
+
+        services.forEach((service, index) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+
+          <td>
+
+            <div class="service-name">
+
+              <input
+                class="editable"
+                value="${escapeHtml(service.location)}"
+                placeholder="[SERVICE LOCATION]"
+                oninput="services[${index}].location=this.value"
+              />
+
+            </div>
+
+            <div class="service-name">
+
+              <input
+                class="editable"
+                value="${escapeHtml(service.description)}"
+                placeholder="[SERVICE NAME]"
+                oninput="services[${index}].description=this.value"
+              />
+
+            </div>
+
+            <div class="scope-title">
+              Scope of Work:
+            </div>
+
+            <select
+              class="scope-template-select"
+              aria-label="Choose a scope of work template"
+              onchange="applyScopeTemplate(${index}, this.value)"
+            >
+              <option value="">Choose a scope template…</option>
+              <option value="kitchen">Kitchen Hood</option>
+              <option value="watertank">Water Tank</option>
+              <option value="acduct">AC Duct</option>
+            </select>
+
+            <textarea
+              class="editable"
+              placeholder="[ENTER SCOPE OF WORK]"
+              oninput="services[${index}].scope=this.value"
+            >${escapeHtml(service.scope)}</textarea>
+
+          </td>
+
+
+          <td>
+
+            <input
+              class="editable"
+              type="number"
+              min="1"
+              value="${service.qty}"
+              style="text-align:center"
+              oninput="
+                services[${index}].qty =
+                Number(this.value) || 0;
+                calculateTotals();
+              "
+            />
+
+          </td>
+
+
+          <td class="amount">
+
+            <input
+              class="editable"
+              type="number"
+              min="0"
+              step="0.01"
+              value="${service.amount}"
+              style="text-align:right"
+              oninput="
+                services[${index}].amount =
+                Number(this.value) || 0;
+                calculateTotals();
+              "
+            />
+
+          </td>
+
+
+          <td>
+
+            <button
+              class="remove-service"
+              onclick="removeService(${index})"
+              title="Remove service"
+            >
+              ×
+            </button>
+
+          </td>
+
+        `;
+
+          body.appendChild(row);
+        });
+
+        calculateTotals();
+      }
+
+      function applyScopeTemplate(index, template) {
+        if (!template || !scopeTemplates[template]) return;
+
+        services[index].scope = scopeTemplates[template];
+        renderServices();
+      }
+
+      function updateQuotationTitle(title) {
+        document.getElementById("quotationHeading").textContent = title;
+      }
+
+      /* =========================================================
+       CALCULATE TOTALS
+    ========================================================== */
+
+      function calculateTotals() {
+        let subtotal = 0;
+
+        services.forEach((service) => {
+          subtotal += Number(service.qty || 0) * Number(service.amount || 0);
+        });
+
+        const vat = subtotal * 0.05;
+
+        const total = subtotal + vat;
+
+        document.getElementById("subtotal").textContent =
+          "AED " + formatMoney(subtotal);
+
+        document.getElementById("vat").textContent = "AED " + formatMoney(vat);
+
+        document.getElementById("total").textContent =
+          "AED " + formatMoney(total);
+      }
+
+      /* =========================================================
+       ADD SERVICE
+    ========================================================== */
+
+      function addService() {
+        services.push({
+          location: "[SERVICE LOCATION]",
+          description: "SERVICE NAME",
+          scope: "Describe the agreed scope of work here.",
+          qty: 1,
+          amount: 0,
+        });
+
+        renderServices();
+      }
+
+      /* =========================================================
+       REMOVE SERVICE
+    ========================================================== */
+
+      function removeService(index) {
+        if (services.length === 1) {
+          services[0] = {
+            location: "[SERVICE LOCATION]",
+            description: "SERVICE NAME",
+            scope: "Describe the agreed scope of work here.",
+            qty: 1,
+            amount: 0,
+          };
+        } else {
+          services.splice(index, 1);
+        }
+
+        renderServices();
+      }
+
+      /* =========================================================
+       CLEAR
+    ========================================================== */
+
+      function clearQuotation() {
+        if (!confirm("Reset all quotation service items?")) {
+          return;
+        }
+
+        services = [
+          {
+            location: "[SERVICE LOCATION]",
+            description: "SERVICE NAME",
+            scope: "Describe the agreed scope of work here.",
+            qty: 1,
+            amount: 0,
+          },
+        ];
+
+        renderServices();
+      }
+
+      /* =========================================================
+       MONEY FORMAT
+    ========================================================== */
+
+      function formatMoney(value) {
+        return Number(value).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      /* =========================================================
+       ESCAPE HTML
+    ========================================================== */
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      /* =========================================================
+       DEFAULT DATE
+    ========================================================== */
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date().toISOString().split("T")[0];
+
+        document.getElementById("quoteDate").value = today;
+
+        const validDate = new Date();
+
+        validDate.setDate(validDate.getDate() + 30);
+
+        document.getElementById("validUntil").value = validDate
+          .toISOString()
+          .split("T")[0];
+
+        renderServices();
+      });
+    </script>
+  </body>
+</html>
