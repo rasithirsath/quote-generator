@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GREENWORLD – Quotation</title>
+    <title>GREENWORLD HYGIENE – Quotation</title>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
@@ -15,7 +15,7 @@
         --green-bg: #eef4ee;
         --charcoal: #1a1a1a;
         --mid: #4a4a4a;
-        --light: #777;
+        --light: #555;
         --border: #d2d2d2;
         --soft: #f7f8f7;
         --white: #fff;
@@ -142,30 +142,28 @@
 
       .logo-placeholder {
         width: 155px;
-        height: 55px;
-        border: 1px dashed var(--border);
+        height: 48px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--light);
-        font-size: 8px;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        margin-bottom: 4px;
+        margin-bottom: 0;
       }
 
-      .company-brand-name {
-        color: var(--green);
-        font-size: 18px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
+      .logo-placeholder img {
+        display: block;
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
       }
 
-      .company-brand-sub {
-        font-size: 8px;
-        color: var(--mid);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .company-brand-wordmark {
+        display: block;
+        width: 155px;
+        height: 32px;
+        margin-left: auto;
+        margin-top: -5px;
+        object-fit: cover;
+        object-position: center;
       }
 
       /* =========================================================
@@ -297,15 +295,58 @@
         margin-bottom: 4px;
       }
 
+      .service-description-input {
+        display: block;
+        min-height: 2.8em !important;
+        height: 2.8em;
+        overflow: hidden;
+        resize: vertical;
+        line-height: 1.4;
+        padding: 2px 0 !important;
+        font-size: inherit;
+      }
+
       .service-description {
         color: var(--mid);
         white-space: pre-line;
       }
 
       .scope-title {
+        display: block;
         margin-top: 7px;
+        font-size: 14px;
         font-weight: 700;
         color: var(--green);
+      }
+
+      .scope-page-body {
+        margin-top: 10px;
+      }
+
+      .scope-card {
+        border: 1px solid var(--border);
+        padding: 10px;
+        margin-bottom: 12px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .scope-card h3 {
+        margin-bottom: 8px;
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #bbb;
+        font-size: 13.5px;
+      }
+
+      .scope-textarea {
+        display: block;
+        margin-top: 6px;
+        min-height: 130px !important;
+        font-size: 11.5px;
+      }
+
+      .payment-terms-heading {
+        margin-top: 14px;
       }
 
       .scope-list {
@@ -341,6 +382,17 @@
         min-height: 100px;
         line-height: 1.55;
         padding: 5px 0;
+      }
+
+      .scope-textarea.editable {
+        color: #222;
+        font-size: 13.5px;
+        line-height: 1.6;
+      }
+
+      .scope-textarea::placeholder {
+        color: #666;
+        opacity: 1;
       }
 
       .service-table textarea.editable {
@@ -548,6 +600,13 @@
         margin-bottom: 8px;
       }
 
+      .stamp-area img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
       /* =========================================================
        BANK DETAILS
     ========================================================= */
@@ -607,8 +666,44 @@
       }
 
       @media print {
+        *,
+        *::before,
+        *::after {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
         body {
           background: white;
+          color: #111;
+        }
+
+        .service-table th {
+          background: #214923 !important;
+          color: #fff !important;
+        }
+
+        .totals td {
+          color: #222 !important;
+        }
+
+        .totals .grand-total td {
+          background: #214923 !important;
+          color: #fff !important;
+          font-weight: 700 !important;
+        }
+
+        .service-table td,
+        .quotation-details td,
+        .totals td {
+          border-color: #aaa;
+        }
+
+        .editable,
+        .service-description,
+        .placeholder {
+          color: #111 !important;
+          opacity: 1 !important;
         }
 
         .toolbar {
@@ -702,11 +797,18 @@
             </div>
 
             <div class="company-brand">
-              <div class="logo-placeholder">GREENWORLD LOGO</div>
+              <div class="logo-placeholder">
+                <img
+                  src="img/GreenWorld-Logo-Final.png"
+                  alt="Greenworld logo"
+                />
+              </div>
 
-              <div class="company-brand-name">GREENWORLD</div>
-
-              <div class="company-brand-sub">Cleaning & Facility Services</div>
+              <img
+                class="company-brand-wordmark"
+                src="img/Greenworld-Text-Logo-Final.png"
+                alt="Greenworld Cleaning & Facility Services"
+              />
             </div>
           </div>
 
@@ -721,6 +823,7 @@
                 <div class="info-value">
                   <input
                     class="editable"
+                    value="ELECTROMECH CONTARCTING LLC"
                     placeholder="[CUSTOMER LEGAL NAME]"
                     aria-label="Customer legal name"
                   />
@@ -804,7 +907,13 @@
 
               <div class="info-row">
                 <div class="info-label">Sales Executive</div>
-                <div class="info-value placeholder">[SALES EXECUTIVE]</div>
+                <div class="info-value">
+                  <input
+                    class="editable placeholder"
+                    placeholder="[SALES EXECUTIVE]"
+                    aria-label="Sales executive"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -848,7 +957,7 @@
           <table class="service-table">
             <thead>
               <tr>
-                <th>Location / Service Description</th>
+                <th>Service Description</th>
                 <th style="width: 45px">#</th>
                 <th style="width: 100px">Charges (AED)</th>
                 <th style="width: 25px"></th>
@@ -877,41 +986,18 @@
             </tr>
           </table>
 
-          <!-- QUOTATION TERMS -->
-
-          <table class="quotation-details">
-            <tr>
-              <td>Payment Terms</td>
-              <td class="placeholder">[BANK TRANSFER / CARD / OTHER]</td>
-            </tr>
-
-            <tr>
-              <td>Quote Validity</td>
-              <td>
-                <input class="editable" value="30 days" />
-              </td>
-            </tr>
-
-            <tr>
-              <td>VAT</td>
-              <td class="placeholder">
-                Prices are subject to UAE VAT at the applicable rate.
-              </td>
-            </tr>
-          </table>
-
           <!-- FOOTER -->
 
           <div class="page-footer">
-            <span> GW-QT-2026-0001 </span>
+            <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 1 of 3 </span>
+            <span> Page 1 of 4 </span>
           </div>
         </div>
       </div>
 
       <!-- =======================================================
-         PAGE 2 — TERMS & CONDITIONS
+         PAGE 2 — SCOPE OF WORK & PAYMENT TERMS
     ======================================================== -->
 
       <div class="quotation">
@@ -923,11 +1009,68 @@
             </div>
 
             <div class="company-brand">
-              <div class="logo-placeholder">GREENWORLD LOGO</div>
+              <div class="logo-placeholder">
+                <img src="img/GreenWorld-Logo-Final.png" alt="Greenworld logo" />
+              </div>
+              <img
+                class="company-brand-wordmark"
+                src="img/Greenworld-Text-Logo-Final.png"
+                alt="Greenworld Cleaning & Facility Services"
+              />
+            </div>
+          </div>
 
-              <div class="company-brand-name">GREENWORLD</div>
+          <div class="terms-heading">SCOPE OF WORK</div>
+          <div id="scopeBody" class="scope-page-body"></div>
 
-              <div class="company-brand-sub">Cleaning & Facility Services</div>
+          <div class="terms-heading payment-terms-heading">PAYMENT TERMS</div>
+          <table class="quotation-details">
+            <tr>
+              <td>Payment Terms</td>
+              <td class="placeholder">[BANK TRANSFER / CARD / OTHER]</td>
+            </tr>
+            <tr>
+              <td>Quote Validity</td>
+              <td><input class="editable" value="30 days" /></td>
+            </tr>
+            <tr>
+              <td>VAT</td>
+              <td class="placeholder">Prices are subject to UAE VAT at the applicable rate.</td>
+            </tr>
+          </table>
+
+          <div class="page-footer">
+            <span class="quote-number-footer">GW-QT-2026-0001</span>
+            <span> Page 2 of 4 </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+         PAGE 3 — TERMS & CONDITIONS
+    ======================================================== -->
+
+      <div class="quotation">
+        <div class="page">
+          <div class="document-header">
+            <div class="quotation-title">
+              <h1>QUOTATION</h1>
+              <p>Service Proposal</p>
+            </div>
+
+            <div class="company-brand">
+              <div class="logo-placeholder">
+                <img
+                  src="img/GreenWorld-Logo-Final.png"
+                  alt="Greenworld logo"
+                />
+              </div>
+
+              <img
+                class="company-brand-wordmark"
+                src="img/Greenworld-Text-Logo-Final.png"
+                alt="Greenworld Cleaning & Facility Services"
+              />
             </div>
           </div>
 
@@ -1046,15 +1189,15 @@
           </div>
 
           <div class="page-footer">
-            <span> GW-QT-2026-0001 </span>
+            <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 2 of 3 </span>
+            <span> Page 3 of 4 </span>
           </div>
         </div>
       </div>
 
       <!-- =======================================================
-         PAGE 3 — ACCEPTANCE + BANK DETAILS
+         PAGE 4 — ACCEPTANCE + BANK DETAILS
     ======================================================== -->
 
       <div class="quotation">
@@ -1066,11 +1209,18 @@
             </div>
 
             <div class="company-brand">
-              <div class="logo-placeholder">GREENWORLD LOGO</div>
+              <div class="logo-placeholder">
+                <img
+                  src="img/GreenWorld-Logo-Final.png"
+                  alt="Greenworld logo"
+                />
+              </div>
 
-              <div class="company-brand-name">GREENWORLD</div>
-
-              <div class="company-brand-sub">Cleaning & Facility Services</div>
+              <img
+                class="company-brand-wordmark"
+                src="img/Greenworld-Text-Logo-Final.png"
+                alt="Greenworld Cleaning & Facility Services"
+              />
             </div>
           </div>
 
@@ -1090,7 +1240,9 @@
             <div class="signature-card">
               <h4>For Greenworld (Authorized Signatory)</h4>
 
-              <div class="stamp-area">COMPANY STAMP / SIGNATURE</div>
+              <div class="stamp-area">
+                <img src="img/sign.png" alt="Authorized signatory signature" />
+              </div>
 
               <div class="signature-line">Authorized Signatory</div>
             </div>
@@ -1106,9 +1258,9 @@
           </div>
 
           <div class="page-footer">
-            <span> GW-QT-2026-0001 </span>
+            <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 3 of 3 </span>
+            <span> Page 4 of 4 </span>
           </div>
         </div>
       </div>
@@ -1121,13 +1273,12 @@
     <script>
       let services = [
         {
-          location: "[SERVICE LOCATION]",
           description: "SERVICE NAME",
-          scope: "Describe the agreed scope of work here.",
           qty: 1,
           amount: 0,
         },
       ];
+      let scopeOfWork = "Describe the agreed scope of work here.";
 
       const scopeTemplates = {
         kitchen: `KITCHEN HOOD CLEANING\n\n• Open all required duct access panels for proper internal cleaning.\n• Clean all exhaust ducts and remove accumulated grease, oil, and contaminants.\n• Supply and install new GI sheet access panels after cleaning.\n• Deep clean the internal and external surfaces of the kitchen hood.\n• Clean all hood filters, baffle filters, and exhaust grilles.\n• Clean the exhaust fan, including the impeller, blades, and casing.\n• Clean the ESP (Electrostatic Precipitator) system, including cells and collector plates.\n• Remove grease deposits to improve airflow and system performance.\n• Submit before-and-after photographs as proof of completed work.\n• Provide a service completion report.`,
@@ -1153,46 +1304,14 @@
 
             <div class="service-name">
 
-              <input
-                class="editable"
-                value="${escapeHtml(service.location)}"
-                placeholder="[SERVICE LOCATION]"
-                oninput="services[${index}].location=this.value"
-              />
-
-            </div>
-
-            <div class="service-name">
-
-              <input
-                class="editable"
-                value="${escapeHtml(service.description)}"
+              <textarea
+                class="editable service-description-input"
+                rows="2"
                 placeholder="[SERVICE NAME]"
-                oninput="services[${index}].description=this.value"
-              />
+                oninput="updateServiceDescription(${index}, this)"
+              >${escapeHtml(service.description)}</textarea>
 
             </div>
-
-            <div class="scope-title">
-              Scope of Work:
-            </div>
-
-            <select
-              class="scope-template-select"
-              aria-label="Choose a scope of work template"
-              onchange="applyScopeTemplate(${index}, this.value)"
-            >
-              <option value="">Choose a scope template…</option>
-              <option value="kitchen">Kitchen Hood</option>
-              <option value="watertank">Water Tank</option>
-              <option value="acduct">AC Duct</option>
-            </select>
-
-            <textarea
-              class="editable"
-              placeholder="[ENTER SCOPE OF WORK]"
-              oninput="services[${index}].scope=this.value"
-            >${escapeHtml(service.scope)}</textarea>
 
           </td>
 
@@ -1251,16 +1370,51 @@
           body.appendChild(row);
         });
 
+        body.querySelectorAll(".service-description-input").forEach((field) => {
+          field.style.height = "auto";
+          field.style.height = `${field.scrollHeight}px`;
+        });
+
+        renderScopeSections();
         calculateTotals();
       }
 
-      function applyScopeTemplate(index, template) {
-        if (!template || !scopeTemplates[template]) return;
+      function renderScopeSections() {
+        const body = document.getElementById("scopeBody");
+        body.innerHTML = `
+          <section class="scope-card">
+            <label class="scope-title" for="scopeTemplate">Scope of Work</label>
+            <select id="scopeTemplate" class="scope-template-select" aria-label="Choose a scope of work template" onchange="applyScopeTemplate(this.value)">
+              <option value="">Choose a scope template...</option>
+              <option value="kitchen">Kitchen Hood</option>
+              <option value="watertank">Water Tank</option>
+              <option value="acduct">AC Duct</option>
+            </select>
+            <textarea id="scopeTextarea" class="editable scope-textarea" placeholder="[ENTER SCOPE OF WORK]" oninput="scopeOfWork=this.value">${escapeHtml(scopeOfWork)}</textarea>
+          </section>`;
 
-        services[index].scope = scopeTemplates[template];
-        renderServices();
+        const field = document.getElementById("scopeTextarea");
+        field.style.height = "auto";
+        field.style.height = `${field.scrollHeight}px`;
       }
 
+      function updateServiceDescription(index, field) {
+        services[index].description = field.value;
+        field.style.height = "auto";
+        field.style.height = `${field.scrollHeight}px`;
+      }
+
+      function applyScopeTemplate(template) {
+        if (!template || !scopeTemplates[template]) return;
+
+        scopeOfWork = scopeTemplates[template];
+        const field = document.getElementById("scopeTextarea");
+        if (field) {
+          field.value = scopeOfWork;
+          field.style.height = "auto";
+          field.style.height = `${field.scrollHeight}px`;
+        }
+      }
       function updateQuotationTitle(title) {
         document.getElementById("quotationHeading").textContent = title;
       }
@@ -1295,9 +1449,7 @@
 
       function addService() {
         services.push({
-          location: "[SERVICE LOCATION]",
           description: "SERVICE NAME",
-          scope: "Describe the agreed scope of work here.",
           qty: 1,
           amount: 0,
         });
@@ -1312,10 +1464,8 @@
       function removeService(index) {
         if (services.length === 1) {
           services[0] = {
-            location: "[SERVICE LOCATION]",
             description: "SERVICE NAME",
-            scope: "Describe the agreed scope of work here.",
-            qty: 1,
+              qty: 1,
             amount: 0,
           };
         } else {
@@ -1336,13 +1486,13 @@
 
         services = [
           {
-            location: "[SERVICE LOCATION]",
             description: "SERVICE NAME",
-            scope: "Describe the agreed scope of work here.",
-            qty: 1,
+              qty: 1,
             amount: 0,
           },
         ];
+
+        scopeOfWork = "Describe the agreed scope of work here.";
 
         renderServices();
       }
@@ -1377,6 +1527,17 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         const today = new Date().toISOString().split("T")[0];
+
+        const quoteNo = document.getElementById("quoteNo");
+        const quoteNumberFooters = document.querySelectorAll(".quote-number-footer");
+        const syncQuoteNumber = () => {
+          quoteNumberFooters.forEach((footer) => {
+            footer.textContent = quoteNo.value.trim();
+          });
+        };
+
+        quoteNo.addEventListener("input", syncQuoteNumber);
+        syncQuoteNumber();
 
         document.getElementById("quoteDate").value = today;
 
