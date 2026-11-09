@@ -58,6 +58,19 @@
         font-weight: 600;
       }
 
+      .vat-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .vat-toggle input {
+        accent-color: var(--green-light);
+      }
+
       .toolbar button {
         border: none;
         border-radius: 4px;
@@ -772,6 +785,11 @@
     <div class="toolbar">
       <div class="toolbar-title">GREENWORLD — Quotation Template</div>
 
+      <label class="vat-toggle">
+        <input id="vatToggle" type="checkbox" checked onchange="toggleVAT(this.checked)" />
+        Include VAT (5%)
+      </label>
+
       <button class="btn-add" onclick="addService()">+ Add Service</button>
 
       <button class="btn-clear" onclick="clearQuotation()">Clear</button>
@@ -975,13 +993,13 @@
               <td id="subtotal">AED 0.00</td>
             </tr>
 
-            <tr>
+            <tr id="vatRow">
               <td>VAT 5%</td>
               <td id="vat">AED 0.00</td>
             </tr>
 
             <tr class="grand-total">
-              <td>TOTAL (Including Tax)</td>
+              <td id="totalLabel">TOTAL (Including VAT)</td>
               <td id="total">AED 0.00</td>
             </tr>
           </table>
@@ -1027,7 +1045,35 @@
           <table class="quotation-details">
             <tr>
               <td>Payment Terms</td>
-              <td class="placeholder">[BANK TRANSFER / CARD / OTHER]</td>
+              <td>Bank transfer to the account below</td>
+            </tr>
+            <tr>
+              <td>Account Name</td>
+              <td>Shahul Hameed</td>
+            </tr>
+            <tr>
+              <td>Bank</td>
+              <td>Emirates NBD Bank</td>
+            </tr>
+            <tr>
+              <td>Account Number</td>
+              <td>1015922865301</td>
+            </tr>
+            <tr>
+              <td>IBAN</td>
+              <td>AE81 0260 0010 1592 2865 301</td>
+            </tr>
+            <tr>
+              <td>Currency</td>
+              <td>AED</td>
+            </tr>
+            <tr>
+              <td>SWIFT Code</td>
+              <td>EBILAEAD</td>
+            </tr>
+            <tr>
+              <td>Routing Number</td>
+              <td>302620122</td>
             </tr>
             <tr>
               <td>Quote Validity</td>
@@ -1430,9 +1476,15 @@
           subtotal += Number(service.qty || 0) * Number(service.amount || 0);
         });
 
-        const vat = subtotal * 0.05;
+        const includeVAT = document.getElementById("vatToggle").checked;
+        const vat = includeVAT ? subtotal * 0.05 : 0;
 
         const total = subtotal + vat;
+
+        document.getElementById("vatRow").hidden = !includeVAT;
+        document.getElementById("totalLabel").textContent = includeVAT
+          ? "TOTAL (Including VAT)"
+          : "TOTAL (VAT Excluded)";
 
         document.getElementById("subtotal").textContent =
           "AED " + formatMoney(subtotal);
@@ -1441,6 +1493,11 @@
 
         document.getElementById("total").textContent =
           "AED " + formatMoney(total);
+      }
+
+      function toggleVAT(enabled) {
+        document.getElementById("vatToggle").checked = enabled;
+        calculateTotals();
       }
 
       /* =========================================================
