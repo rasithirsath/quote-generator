@@ -354,7 +354,7 @@
       .scope-textarea {
         display: block;
         margin-top: 6px;
-        min-height: 130px !important;
+        min-height: 3em !important;
         font-size: 11.5px;
       }
 
@@ -729,19 +729,24 @@
 
         .quotation {
           width: 210mm;
-          min-height: 297mm;
+          min-height: 0;
           margin: 0;
           box-shadow: none;
-          page-break-after: always;
-        }
-
-        .quotation:last-child {
           page-break-after: auto;
         }
 
+        .quotation:last-child {
+          page-break-before: always;
+        }
+
         .page {
-          min-height: 297mm;
+          min-height: 0;
           padding: 14mm 14mm 17mm;
+        }
+
+        .page-footer {
+          position: static;
+          margin-top: 14px;
         }
 
         .remove-service {
@@ -1009,7 +1014,7 @@
           <div class="page-footer">
             <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 1 of 4 </span>
+            <span> Section 1 of 5 </span>
           </div>
         </div>
       </div>
@@ -1041,53 +1046,9 @@
           <div class="terms-heading">SCOPE OF WORK</div>
           <div id="scopeBody" class="scope-page-body"></div>
 
-          <div class="terms-heading payment-terms-heading">PAYMENT TERMS</div>
-          <table class="quotation-details">
-            <tr>
-              <td>Payment Terms</td>
-              <td>Bank transfer to the account below</td>
-            </tr>
-            <tr>
-              <td>Account Name</td>
-              <td>Shahul Hameed</td>
-            </tr>
-            <tr>
-              <td>Bank</td>
-              <td>Emirates NBD Bank</td>
-            </tr>
-            <tr>
-              <td>Account Number</td>
-              <td>1015922865301</td>
-            </tr>
-            <tr>
-              <td>IBAN</td>
-              <td>AE81 0260 0010 1592 2865 301</td>
-            </tr>
-            <tr>
-              <td>Currency</td>
-              <td>AED</td>
-            </tr>
-            <tr>
-              <td>SWIFT Code</td>
-              <td>EBILAEAD</td>
-            </tr>
-            <tr>
-              <td>Routing Number</td>
-              <td>302620122</td>
-            </tr>
-            <tr>
-              <td>Quote Validity</td>
-              <td><input class="editable" value="30 days" /></td>
-            </tr>
-            <tr>
-              <td>VAT</td>
-              <td class="placeholder">Prices are subject to UAE VAT at the applicable rate.</td>
-            </tr>
-          </table>
-
           <div class="page-footer">
             <span class="quote-number-footer">GW-QT-2026-0001</span>
-            <span> Page 2 of 4 </span>
+            <span> Section 2 of 5 </span>
           </div>
         </div>
       </div>
@@ -1237,13 +1198,13 @@
           <div class="page-footer">
             <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 3 of 4 </span>
+            <span> Section 3 of 5 </span>
           </div>
         </div>
       </div>
 
       <!-- =======================================================
-         PAGE 4 — ACCEPTANCE + BANK DETAILS
+         PAGE 4 — ACCEPTANCE
     ======================================================== -->
 
       <div class="quotation">
@@ -1294,8 +1255,6 @@
             </div>
           </div>
 
-          <!-- BANK DETAILS -->
-
           <div class="closing-message">
             <strong>Important:</strong>
             This quotation is subject to the terms and conditions stated herein.
@@ -1306,7 +1265,49 @@
           <div class="page-footer">
             <span class="quote-number-footer">GW-QT-2026-0001</span>
 
-            <span> Page 4 of 4 </span>
+            <span> Section 4 of 5 </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+         PAGE 5 — BANK DETAILS
+    ======================================================== -->
+
+      <div class="quotation">
+        <div class="page">
+          <div class="document-header">
+            <div class="quotation-title">
+              <h1>QUOTATION</h1>
+              <p>Service Proposal</p>
+            </div>
+
+            <div class="company-brand">
+              <div class="logo-placeholder">
+                <img src="img/GreenWorld-Logo-Final.png" alt="Greenworld logo" />
+              </div>
+              <img
+                class="company-brand-wordmark"
+                src="img/Greenworld-Text-Logo-Final.png"
+                alt="Greenworld Cleaning & Facility Services"
+              />
+            </div>
+          </div>
+
+          <div class="bank-title">BANK DETAILS</div>
+          <table class="bank-table">
+            <tr><td>Account Name</td><td>Shahul Hameed</td></tr>
+            <tr><td>Bank</td><td>Emirates NBD Bank</td></tr>
+            <tr><td>Account Number</td><td>1015922865301</td></tr>
+            <tr><td>IBAN</td><td>AE81 0260 0010 1592 2865 301</td></tr>
+            <tr><td>Currency</td><td>AED</td></tr>
+            <tr><td>SWIFT Code</td><td>EBILAEAD</td></tr>
+            <tr><td>Routing Number</td><td>302620122</td></tr>
+          </table>
+
+          <div class="page-footer">
+            <span class="quote-number-footer">GW-QT-2026-0001</span>
+            <span> Section 5 of 5 </span>
           </div>
         </div>
       </div>
