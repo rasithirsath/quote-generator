@@ -955,6 +955,9 @@
               </option>
               <option value="WATER TANK CLEANING">WATER TANK CLEANING</option>
               <option value="AC DUCT CLEANING">AC DUCT CLEANING</option>
+              <option value="GREASE TRAP CLEANING SERVICES">
+                GREASE TRAP CLEANING SERVICES
+              </option>
             </select>
             <span id="quotationHeading">QUOTATION</span>
           </div>
@@ -1331,6 +1334,7 @@
         kitchen: `KITCHEN HOOD CLEANING\n\n• Open all required duct access panels for proper internal cleaning.\n• Clean all exhaust ducts and remove accumulated grease, oil, and contaminants.\n• Supply and install new GI sheet access panels after cleaning.\n• Deep clean the internal and external surfaces of the kitchen hood.\n• Clean all hood filters, baffle filters, and exhaust grilles.\n• Clean the exhaust fan, including the impeller, blades, and casing.\n• Clean the ESP (Electrostatic Precipitator) system, including cells and collector plates.\n• Remove grease deposits to improve airflow and system performance.\n• Submit before-and-after photographs as proof of completed work.\n• Provide a service completion report.`,
         watertank: `WATER TANK CLEANING\n\nTank: Concrete tank, 50,000 gallons — 1 unit\n\n• Disinfect pipelines by chemical flushing using approved chemicals, subject to municipality approval.\n• Clean the inside and outside of the water tank.\n• Remove dirt, debris, and sediment from the tank.\n• Clean, scour, and pressure wash tank wall surfaces using approved methods.\n• Dry and refill the tank with municipality water.\n• Provide a detailed report with before-and-after photographs of the cleaning process.`,
         acduct: `AC DUCT CLEANING\n\n• Cover work areas with plastic sheeting.\n• Remove and clean filters; clean fixed filters in place.\n• Brush-clean ducts using a rotary brush machine to remove dust and debris.\n• Apply an AC duct sanitizer to help control bacteria, grime, and fungus.\n• Clean all air diffusers, linear grilles, ducts, and grilles.\n• Check airflow, humidity, and cooling for each machine.\n• Use suitable cleaning products for grilles.\n• Provide a before-and-after service report.`,
+        greasetrap: `GREASE TRAP CLEANING SERVICES\n\nCompany: GREEN WORLD HYGIENE CLEANING SERVICES\n\nSCOPE OF SERVICES\n1. Carefully open the grease trap cover and ensure proper access.\n2. Remove accumulated grease, oil, fats, sludge, and solid waste from the grease trap.\n3. Pump out wastewater and remaining waste using suitable vacuum or pumping equipment.\n4. Manually clean internal walls, partitions, baffles, and accessible surfaces.\n5. Thoroughly wash and rinse the grease trap.\n6. Collect and remove all extracted waste from the site.\n7. Securely reinstall the cover and clean the surrounding work area.\n8. Provide a service completion report with before-and-after photographs.\n\nWASTE DISPOSAL\nAll collected grease, sludge, and wastewater will be transported to and disposed of at an approved waste disposal facility in accordance with applicable local regulations.`,
       };
 
       /* =========================================================
@@ -1436,6 +1440,7 @@
               <option value="kitchen">Kitchen Hood</option>
               <option value="watertank">Water Tank</option>
               <option value="acduct">AC Duct</option>
+              <option value="greasetrap">Grease Trap Cleaning</option>
             </select>
             <textarea id="scopeTextarea" class="editable scope-textarea" placeholder="[ENTER SCOPE OF WORK]" oninput="scopeOfWork=this.value">${escapeHtml(scopeOfWork)}</textarea>
           </section>`;
